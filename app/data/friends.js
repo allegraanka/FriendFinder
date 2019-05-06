@@ -1,3 +1,4 @@
+
 var friendArray = [
     {
         name: "Allegra",
