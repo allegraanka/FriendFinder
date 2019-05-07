@@ -18,12 +18,18 @@
             <hr class="my-4">
             <p>Submit the survey below to find a friendly match.</p>
             <a class="btn btn-primary btn-lg" href="/" role="button" style="background:black;border-color:white;">Home</a>
+            <a class="btn btn-primary btn-lg" href="/allfriends" role="button" style="background:black;border-color:white;">See
+                Friends</a>
         </div>
 
         <form style="margin-top:2%;margin-bottom:2%;">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" placeholder="Enter your first name">
+            </div>
+            <div class="form-group">
+                <label for="name">Bio</label>
+                <input type="text" class="form-control" id="bio" placeholder="Give us a brief bio">
             </div>
             <div class="form-group">
                 <label for="question1">Question 1</label>
@@ -125,19 +131,52 @@
                     <option>5</option>
                 </select>
             </div>
-            <a class="btn btn-primary btn-lg" type="submit" style="background:black;border-color:white;">Submit</a>
+            <input class="btn btn-primary btn-lg submit" type="button" value="Submit" style="color:white;background:black;border-color:white;">
         </form>
     
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
             crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+            $(".submit").on("click", function(event) {
+                event.preventDefault();
+                console.log("Button click works.");
+
+                var newFriend = {
+                    name: $("#name").val().trim(),
+                    bio: $("bio").val().trim(),
+                    scores: [
+                        $("#question1").val().trim(),
+                        $("#question2").val().trim(),
+                        $("#question3").val().trim(),
+                        $("#question4").val().trim(),
+                        $("#question5").val().trim(),
+                        $("#question6").val().trim(),
+                        $("#question7").val().trim(),
+                        $("#question8").val().trim(),
+                        $("#question9").val().trim(),
+                        $("#question10").val().trim()
+                    ]
+                };
+
+                console.log(newFriend);
+
+                $.post("/api/friends", newFriend, function(data) {
+                    if (data) {
+                        console.log(data);
+                    } else {
+                        console.log("Oops. There was an error.");
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

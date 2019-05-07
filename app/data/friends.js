@@ -2,6 +2,7 @@
 var friendArray = [
     {
         name: "Allegra",
+        bio: "I'm cool.",
         scores: [
             1,
             2,
