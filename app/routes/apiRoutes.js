@@ -11,6 +11,12 @@ module.exports = function(app) {
         friendData.push(req.body);
         res.json(true);
 
-        // add match logic here
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+        console.dir(`This is the array: ${req.body.scores}`);
+        console.dir(`This is the total score: ${req.body.scores.reduce(reducer)}`);
+        // i was trying to reduce the scores array off the response object to get a total score
+        // with the total score, i would loop through the friend array to find a match or a close match to the current total score
+        // but i didn't make it
     });
 }
